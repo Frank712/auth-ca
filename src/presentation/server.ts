@@ -17,6 +17,7 @@ export class Server {
   }
 
   async start() {
+    this.app.use(this.routes);
     this.app.listen(this.port, () => {
       console.log(`Server running in port ${this.port}`);
     });
