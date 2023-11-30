@@ -17,6 +17,8 @@ export class Server {
   }
 
   async start() {
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: true }));
     this.app.use(this.routes);
     this.app.listen(this.port, () => {
       console.log(`Server running in port ${this.port}`);
