@@ -6,6 +6,7 @@ import {
   RegisterUserDto,
   UserEntity,
 } from "../../domain";
+import { UserMapper } from "../mappers";
 
 type HashFunction = (password: string) => string;
 type CompareFunction = (password: string, hashed: string) => boolean;
@@ -27,7 +28,7 @@ export class AuthDatasourceImpl implements AuthDatasource {
         password: this.hashPassword(password),
       });
       await user.save();
-      return new UserEntity(user.id, name, email, password, user.roles);
+      return UserMapper.userEntityFromObject(user);
     } catch (error) {
       if (error instanceof CustomError) {
         throw error;
