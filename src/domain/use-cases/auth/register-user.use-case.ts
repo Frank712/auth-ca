@@ -3,7 +3,7 @@ import { RegisterUserDto } from "../../dtos/auth/register-user.dto";
 import { CustomError } from "../../errors/custom.error";
 import { AuthRepository } from "../../repositories/auth.repository";
 
-interface UserToken {
+export interface UserToken {
   token: string;
   user: {
     id: string;
@@ -13,10 +13,13 @@ interface UserToken {
 }
 
 interface RegisterUserUseCase {
-  execute(registerUserDto: RegisterUserDto): Promise<any>;
+  execute(registerUserDto: RegisterUserDto): Promise<UserToken>;
 }
 
-type SignToken = (payload: Object, duration?: string) => Promise<string | null>;
+export type SignToken = (
+  payload: Object,
+  duration?: string
+) => Promise<string | null>;
 
 export class RegisterUser implements RegisterUserUseCase {
   constructor(
