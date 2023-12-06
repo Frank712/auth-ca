@@ -36,6 +36,6 @@ export class AuthController {
   };
 
   getUsers = (req: Request, res: Response) => {
-    UserModel.find().then((users) => res.json(users));
+    UserModel.find().then((users) => res.json({ token: req.body.token }));
   };
 }
